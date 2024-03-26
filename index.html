@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <!-- React Library-->
+    <script src="https://unpkg.com/react@18/umd/react.development.js" crossorigin></script>
+    <!-- React DOM Library-->
+    <script src="https://unpkg.com/react-dom@18/umd/react-dom.development.js" crossorigin></script>
+    <!-- BABEL Library-->
+    <script src="https://unpkg.com/@babel/standalone/babel.min.js"></script>
+    <title>Meal Voter App</title>
+</head>
+<body>
+
+    <div id="app">Render is not working</div>
+
+    <script type="text/babel">
+
+        //Meal Voter Class Component
+        class MealVoter extends React.Component {
+
+            constructor(props){
+                super(props);
+                    //set the initial state of votes (0)
+                    this.state = {
+                        votes: 0
+                    }; 
+            }
+
+            //onClickLikeButton function
+            onClickLikeButton() {
+                this.setState({ //set State if button is clicked increase the vote by 1
+                    votes: this.state.votes + 1
+                });
+            }
+
+            //onClickDislike Button function
+            onClickDislikeButton() {
+                this.setState({ //set State if button is clicked decrease the vote by 1
+                    votes: this.state.votes - 1
+                });
+            }
+
+            render(){
+
+                //Div CSS style
+                var dinnerVoteStyle = {
+                    display: "inline-block",
+                    textAlign: "center",
+                    margin: 20,
+                    height: 500,
+                    width: 300,
+                    padding: 0,
+                    backgroundColor: "white",
+                    WebkitFilter: "drop-shadow(0px 0px 5px #555)",
+                    filter: "drop-shador(0px 0px 5px #555)" 
+                }
+
+                //Image CSS style
+                var imgStyle = {
+                    height: 200,
+                    width: 200,
+                    marginTop: 20
+                }
+
+                return(
+                    <div style={dinnerVoteStyle}>
+                        <img src={this.props.img} alt="Meal" style={imgStyle}/>
+                        <h1>{this.props.meal}</h1>
+                        <p>Vote if you like the meal</p>
+                        <button onClick={this.onClickLikeButton.bind(this)}>+1</button>
+                        <p>Vote if you dislike the meal</p>
+                        <button onClick={this.onClickDislikeButton.bind(this)}>-1</button>
+                        <p>Total:{this.state.votes}</p>
+                    </div>
+                );
+            }
+        }
+
+
+        ReactDOM.render(
+            <div>
+                <MealVoter meal="Grilled Fish" img="https://images.unsplash.com/photo-1519708227418-c8fd9a32b7a2?q=80&w=1770&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D"/>
+
+                <MealVoter meal="Meat with Sauce" img="https://images.unsplash.com/photo-1574484284002-952d92456975?q=80&w=1887&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D"/>
+
+                <MealVoter meal="Chicken" img="https://images.unsplash.com/photo-1572424117831-005b5e9b3ae4?q=80&w=1887&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D"/>
+                
+            </div>,
+            document.getElementById("app")
+        )
+    </script>
+</body>
+</html>
